@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Peduli Pangan</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="skip">Lewati</string>
+    <string name="onboarding_title_1">Jelajahi toko-toko</string>
+    <string name="onboarding_desc_1">Dengan Peduli Pangan Anda dapat menyimpan Tas kejutan berisi sisa makanan dari kafe, depot, dan toko lokal Anda.</string>
+    <string name="onboarding_title_2">Bersiaplah untuk kejutan</string>
+    <string name="onboarding_desc_2">Apa hayo</string>
+    <string name="onboarding_title_3">Delivery Time</string>
+    <string name="onboarding_desc_3">Penjelasan tentang waktu</string>
+    <string name="onboarding_title_4">Status Ekonomi</string>
+    <string name="onboarding_desc_4">Penjelasan status ekonomi</string>
+    <string name="onboarding_title_5">Celebrate</string>
+    <string name="onboarding_desc_5">Penjelasan berhasil</string>
+    <string name="start_now">Mulai sekarang</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="welcome_desc">Yuk mulai</string>
+    <string name="register">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="welcome_back">Selamat datang kembali</string>
+    <string name="input_email_password">Silahkan masukkan email dan password Anda</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_account">Buat akun baru untuk melanjutkan</string>
+    <string name="name">Nama</string>
+    <string name="pass_less_than_8_char">Kata sandi tidak boleh kurang dari 8 karakter</string>
+    <string name="invalid_email">Email tidak valid</string>
+    <string name="input_email">Silakan masukkan alamat email Anda</string>
+    <string name="input_password">Silakan masukkan kata sandi Anda</string>
+    <string name="success">Sukses</string>
+    <string name="continue_on">Lanjutkan</string>
+    <string name="error">Error:</string>
+    <string name="input_name">Silakan masukkan nama Anda</string>
+</resources>
