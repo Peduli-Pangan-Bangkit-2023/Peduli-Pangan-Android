@@ -150,6 +150,7 @@
       android:layout_height="64dp"
       android:layout_margin="32dp"
       android:text="@string/register"
+      android:backgroundTint="@color/dark_green"
       android:textSize="18sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
