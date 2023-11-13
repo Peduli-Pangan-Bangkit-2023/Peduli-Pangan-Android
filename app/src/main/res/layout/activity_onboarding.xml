@@ -15,6 +15,7 @@
         android:layout_margin="4dp"
         android:text="@string/skip"
         android:textSize="12sp"
+        android:textColor="@color/dark_green"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -243,6 +244,7 @@
         android:layout_marginBottom="32dp"
         android:alpha="0"
         android:text="@string/start_now"
+        android:backgroundTint="@color/dark_green"
         app:layout_constraintBottom_toTopOf="@+id/menu2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

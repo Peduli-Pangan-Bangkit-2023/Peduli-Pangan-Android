@@ -120,6 +120,7 @@
         android:layout_margin="32dp"
         android:text="@string/login"
         android:textSize="18sp"
+        android:backgroundTint="@color/dark_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_password" />
