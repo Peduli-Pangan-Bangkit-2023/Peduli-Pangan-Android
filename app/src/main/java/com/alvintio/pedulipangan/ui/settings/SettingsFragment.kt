@@ -18,6 +18,7 @@ import com.alvintio.pedulipangan.data.repo.UserPreferences
 import com.alvintio.pedulipangan.databinding.FragmentSettingsBinding
 import com.alvintio.pedulipangan.view.LoginActivity
 import com.alvintio.pedulipangan.view.OnboardingActivity
+import com.alvintio.pedulipangan.view.WelcomeActivity
 import java.util.prefs.Preferences
 
 class SettingsFragment : Fragment() {
@@ -41,7 +42,7 @@ class SettingsFragment : Fragment() {
 
         settingsViewModel.logoutComplete.observe(viewLifecycleOwner) { logoutComplete ->
             if (logoutComplete) {
-                startActivity(Intent(requireContext(), OnboardingActivity::class.java))
+                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 requireActivity().finish()
             }
         }
