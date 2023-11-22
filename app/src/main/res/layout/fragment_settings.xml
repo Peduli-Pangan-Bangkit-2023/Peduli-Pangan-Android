@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.settings.SettingsFragment">
 
     <RelativeLayout
         android:id="@+id/container"
@@ -34,7 +34,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20sp"
-            tools:text="John Doe" />
+            android:text="@string/settings_user_name"/>
 
         <TextView
             android:id="@+id/tv_user_email"

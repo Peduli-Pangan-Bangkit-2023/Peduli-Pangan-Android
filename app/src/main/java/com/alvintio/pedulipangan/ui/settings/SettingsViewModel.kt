@@ -11,12 +11,6 @@ class SettingsViewModel(private val pref: UserPreferences) : ViewModel() {
     private val _logoutComplete = MutableLiveData<Boolean>()
     val logoutComplete: LiveData<Boolean> = _logoutComplete
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is settings Fragment"
-    }
-
-    val text: LiveData<String> = _text
-
     fun userLogout() {
         viewModelScope.launch {
             pref.logout()

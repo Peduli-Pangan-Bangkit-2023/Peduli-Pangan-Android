@@ -7,19 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.alvintio.pedulipangan.R
 import com.alvintio.pedulipangan.data.repo.UserPreferences
 import com.alvintio.pedulipangan.databinding.FragmentSettingsBinding
-import com.alvintio.pedulipangan.view.LoginActivity
-import com.alvintio.pedulipangan.view.OnboardingActivity
+import com.alvintio.pedulipangan.util.ViewUtils
 import com.alvintio.pedulipangan.view.WelcomeActivity
-import java.util.prefs.Preferences
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -45,11 +39,6 @@ class SettingsFragment : Fragment() {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 requireActivity().finish()
             }
-        }
-
-        val textView: TextView = binding.textSettings
-        settingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
         }
 
         binding.btnLogout.setOnClickListener {

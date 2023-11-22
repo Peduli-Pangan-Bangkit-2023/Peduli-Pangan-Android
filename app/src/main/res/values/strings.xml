@@ -41,4 +41,5 @@
     <string name="settings">Settings</string>
     <string name="language_settings">Change Language</string>
     <string name="economic_settings">Economic Status</string>
+    <string name="settings_user_name">John Doe</string>
 </resources>

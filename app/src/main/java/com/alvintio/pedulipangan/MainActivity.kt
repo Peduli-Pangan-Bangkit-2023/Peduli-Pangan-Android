@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alvintio.pedulipangan.data.repo.UserPreferences
 import com.alvintio.pedulipangan.databinding.ActivityMainBinding
+import com.alvintio.pedulipangan.util.ViewUtils
 import com.alvintio.pedulipangan.viewmodel.MainViewModel
 import com.alvintio.pedulipangan.viewmodel.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,8 +39,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_settings
@@ -47,5 +47,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        ViewUtils.setupFullScreen(this)
     }
 }
