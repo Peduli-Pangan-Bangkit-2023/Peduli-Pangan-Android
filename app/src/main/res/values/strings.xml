@@ -42,4 +42,8 @@
     <string name="language_settings">Change Language</string>
     <string name="economic_settings">Economic Status</string>
     <string name="settings_user_name">John Doe</string>
+    <string name="restaurant_dummy">Restaurant</string>
+    <string name="rating_dummy">10</string>
+    <string name="list_dashboard">List</string>
+    <string name="map_dashboard">Map</string>
 </resources>
