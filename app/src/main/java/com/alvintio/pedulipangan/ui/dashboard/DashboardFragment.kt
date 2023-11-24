@@ -35,6 +35,7 @@ class DashboardFragment : Fragment() {
         val viewPager: ViewPager2 = root.findViewById(R.id.viewPager)
         val adapter = DashboardPagerAdapter(requireActivity())
         viewPager.adapter = adapter
+        viewPager.isUserInputEnabled = false
 
         val searchView = binding.searchView
         searchView.isFocusable = true
