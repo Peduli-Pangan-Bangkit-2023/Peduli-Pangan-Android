@@ -46,4 +46,5 @@
     <string name="rating_dummy">10</string>
     <string name="list_dashboard">List</string>
     <string name="map_dashboard">Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

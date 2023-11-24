@@ -3,7 +3,6 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:layout_marginLeft="8dp"
     android:layout_marginTop="4dp"
@@ -41,25 +40,8 @@
                 android:layout_toEndOf="@id/iv_restaurant"
                 android:text="@string/restaurant_dummy"
                 android:textColor="@color/black"
-                android:layout_alignTop="@id/tv_ratings"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_ratings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/rating_dummy"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingTop="20dp"
-                android:layout_toEndOf="@id/iv_restaurant"
-                app:layout_constraintTop_toBottomOf="@+id/tv_restaurant"
-                app:layout_constraintStart_toStartOf="@+id/tv_restaurant"
-                android:layout_marginTop="8dp"
-                card_view:drawableStartCompat="@drawable/baseline_star_24" />
 
             <ImageView
                 android:layout_width="wrap_content"
