@@ -27,12 +27,14 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <androidx.appcompat.widget.SearchView
+            <SearchView
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:queryHint="Search for food"
                 android:iconifiedByDefault="false"
-                android:queryHint="Search for food" />
+                android:elevation="5dp"
+                android:background="@drawable/custom_background"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -49,6 +51,7 @@
                 android:id="@+id/filterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:background="@drawable/custom_background"
                 android:src="@drawable/baseline_filter_list" />
 
         </androidx.cardview.widget.CardView>

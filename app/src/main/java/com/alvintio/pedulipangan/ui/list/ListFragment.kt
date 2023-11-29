@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alvintio.pedulipangan.R
+import com.alvintio.pedulipangan.adapter.RestaurantAdapter
 
 class ListFragment : Fragment() {
     override fun onCreateView(

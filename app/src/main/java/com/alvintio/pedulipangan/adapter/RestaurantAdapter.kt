@@ -1,4 +1,4 @@
-package com.alvintio.pedulipangan.ui.list
+package com.alvintio.pedulipangan.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +36,11 @@ class RestaurantAdapter(private var restaurantList: List<String>) :
     override fun getItemCount(): Int {
         return restaurantList.size
     }
+
+    fun getRestaurantName(position: Int): String {
+        return restaurantList[position]
+    }
+
 
 }
 

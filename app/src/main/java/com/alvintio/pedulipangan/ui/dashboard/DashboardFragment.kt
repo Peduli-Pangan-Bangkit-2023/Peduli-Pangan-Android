@@ -3,13 +3,13 @@ package com.alvintio.pedulipangan.ui.dashboard
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.alvintio.pedulipangan.R
 import com.alvintio.pedulipangan.databinding.FragmentDashboardBinding
-import com.alvintio.pedulipangan.ui.list.RestaurantAdapter
+import com.alvintio.pedulipangan.adapter.RestaurantAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -47,7 +47,7 @@ class DashboardFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                handleSearchQuery(newText)
+                // handleSearchQuery(newText)
                 return true
             }
         })
@@ -75,12 +75,14 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
-    private fun handleSearchQuery(query: String?) {
+    /*private fun handleSearchQuery(query: String?) {
+        // Assuming restaurantList is a list of strings
         val filteredList = restaurantList.filter { restaurant ->
             restaurant.contains(query.orEmpty(), ignoreCase = true)
         }
 
-        adapter.updateData(filteredList)
-    }
+        // Update your adapter or perform any action based on the search query
+        // adapter.updateData(filteredList)
+    } */
 
 }

@@ -1,34 +1,38 @@
 package com.alvintio.pedulipangan.ui.home
 
+import FoodAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.alvintio.pedulipangan.databinding.FragmentHomeBinding
+import com.alvintio.pedulipangan.adapter.RestaurantAdapter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
+    ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val view = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val restaurantList: List<String> = listOf("Restaurant 1", "Restaurant 2", "Restaurant 3",
+            "Restaurant 4", "Restaurant 5", "Restaurant 6", "Restaurant 7", "Restaurant 8",
+            "Restaurant 9", "Restaurant 10", "Restaurant 11", "Restaurant 12", "Restaurant 13",
+            "Restaurant 14", "Restaurant 15", "Restaurant 16", "Restaurant 17", "Restaurant 18")
+
+        val restaurantAdapter = RestaurantAdapter(restaurantList)
+        val foodAdapter = FoodAdapter(restaurantList, restaurantAdapter)
+
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.adapter = foodAdapter
+
+        return view
     }
 
     override fun onDestroyView() {
