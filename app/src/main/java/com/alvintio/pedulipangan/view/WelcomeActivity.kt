@@ -17,7 +17,7 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         appIcon = findViewById(R.id.iv_welcome_image)
-        appIcon.setAnimation(R.raw.app_icon)
+        appIcon.setAnimation(R.raw.app_logo)
         appIcon.playAnimation()
 
         ViewUtils.setupFullScreen(this)

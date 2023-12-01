@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.LoginActivity">
 
     <ImageView
@@ -28,6 +29,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +45,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +57,7 @@
         android:layout_height="wrap_content"
         android:text="@string/email"
         android:layout_marginStart="32dp"
+        android:textColor="@color/light_green"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
@@ -86,6 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/light_green"
         android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_email" />
@@ -118,9 +123,11 @@
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_margin="32dp"
+        android:background="@drawable/custom_in_button"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         android:text="@string/login"
         android:textSize="18sp"
-        android:backgroundTint="@color/dark_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_password" />

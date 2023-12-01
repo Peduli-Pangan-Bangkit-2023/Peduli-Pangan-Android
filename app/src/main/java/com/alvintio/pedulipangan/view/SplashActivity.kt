@@ -30,7 +30,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         appIcon = findViewById(R.id.img_icon)
-        appIcon.setAnimation(R.raw.app_icon)
+        appIcon.setAnimation(R.raw.app_logo)
         appIcon.playAnimation()
 
         ViewUtils.setupFullScreen(this)
