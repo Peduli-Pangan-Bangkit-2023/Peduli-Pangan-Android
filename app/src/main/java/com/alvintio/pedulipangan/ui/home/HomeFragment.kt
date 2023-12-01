@@ -1,12 +1,12 @@
 package com.alvintio.pedulipangan.ui.home
 
-import FoodAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.alvintio.pedulipangan.adapter.FoodAdapter
 import com.alvintio.pedulipangan.databinding.FragmentHomeBinding
 import com.alvintio.pedulipangan.adapter.RestaurantAdapter
 

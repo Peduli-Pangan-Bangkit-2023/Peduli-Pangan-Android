@@ -14,8 +14,10 @@ import com.alvintio.pedulipangan.data.repo.UserPreferences
 import com.alvintio.pedulipangan.databinding.FragmentSettingsBinding
 import com.alvintio.pedulipangan.util.ViewUtils
 import com.alvintio.pedulipangan.view.WelcomeActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsFragment : Fragment() {
+    private lateinit var auth: FirebaseAuth
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     private lateinit var userPreferences: UserPreferences
@@ -28,6 +30,8 @@ class SettingsFragment : Fragment() {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        auth = FirebaseAuth.getInstance()
 
         userPreferences = UserPreferences.getInstance(requireContext().dataStore)
 
@@ -52,3 +56,4 @@ class SettingsFragment : Fragment() {
         _binding = null
     }
 }
+

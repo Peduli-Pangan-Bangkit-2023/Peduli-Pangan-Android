@@ -1,4 +1,5 @@
-// FoodAdapter.kt
+package com.alvintio.pedulipangan.adapter
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

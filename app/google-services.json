@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463362133464",
+    "project_id": "peduli-pangan-383fa",
+    "storage_bucket": "peduli-pangan-383fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463362133464:android:8f2c9565c952c98b3fb6ad",
+        "android_client_info": {
+          "package_name": "com.alvintio.pedulipangan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNoE3V9KhHKegd1C-BFs8kdmD1BrsVREo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

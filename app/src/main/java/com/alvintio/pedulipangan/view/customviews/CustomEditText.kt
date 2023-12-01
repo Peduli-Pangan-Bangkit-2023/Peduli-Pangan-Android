@@ -41,7 +41,7 @@ class CustomEditText : AppCompatEditText {
                     }
 
                     override fun afterTextChanged(s: Editable?) {
-                        // Do Nothing
+
                     }
                 })
             }

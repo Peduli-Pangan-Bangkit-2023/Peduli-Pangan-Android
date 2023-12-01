@@ -13,17 +13,17 @@ import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
 import com.alvintio.pedulipangan.MainActivity
 import com.alvintio.pedulipangan.R
-import com.alvintio.pedulipangan.data.repo.UserPreferences
+import com.google.firebase.auth.FirebaseAuth
 import com.alvintio.pedulipangan.util.ViewUtils
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_prefs")
+
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private lateinit var appIcon: LottieAnimationView
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,17 +41,18 @@ class SplashActivity : AppCompatActivity() {
             content.viewTreeObserver.addOnDrawListener { false }
         }
 
+        auth = FirebaseAuth.getInstance()
+
         lifecycleScope.launch {
             delay(6000.toLong())
 
-            val userLogin = runBlocking {
-                UserPreferences.getInstance(this@SplashActivity.dataStore).getLoginStatus().first()
-            }
+            val user = auth.currentUser
 
-            if (userLogin == true)
+            if (user != null) {
                 ViewUtils.moveActivityNoHistory(this@SplashActivity, MainActivity::class.java)
-            else
+            } else {
                 ViewUtils.moveActivityNoHistory(this@SplashActivity, OnboardingActivity::class.java)
+            }
         }
     }
 }
