@@ -17,7 +17,7 @@
 
         <RelativeLayout
             android:id="@+id/topLayout"
-            android:layout_width="200dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
@@ -43,23 +43,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="7dp"
-                android:layout_toEndOf="@id/iv_restaurant_food"
-                android:text="@string/food_dummy"
-                android:textColor="@color/black"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:layout_below="@id/tv_restaurant_food"/>
-
-            <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_food"
+                android:layout_below="@id/tv_restaurant_food"
                 android:layout_gravity="center"
                 android:layout_marginStart="7dp"
                 android:layout_toEndOf="@id/iv_restaurant_food"

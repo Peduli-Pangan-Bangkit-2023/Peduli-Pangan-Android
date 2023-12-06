@@ -1,31 +1,24 @@
 package com.alvintio.pedulipangan.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import com.alvintio.pedulipangan.MainActivity
 import com.alvintio.pedulipangan.R
-import com.alvintio.pedulipangan.data.repo.Result
-import com.alvintio.pedulipangan.data.repo.UserPreferences
 import com.alvintio.pedulipangan.databinding.ActivityLoginBinding
 import com.alvintio.pedulipangan.util.ViewUtils
-import com.alvintio.pedulipangan.viewmodel.LoginViewModel
-import com.alvintio.pedulipangan.viewmodel.ViewModelFactory
+import com.alvintio.pedulipangan.viewmodel.AuthenticationViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_prefs")
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var viewModel: AuthenticationViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -36,6 +29,19 @@ class LoginActivity : AppCompatActivity() {
         ViewUtils.setupFullScreen(this)
 
         setupLogin()
+
+        viewModel.loginState.observe(this) { loginState ->
+            when (loginState) {
+                is AuthenticationViewModel.LoginState.Success -> {
+                    moveToMainActivity()
+                }
+
+                is AuthenticationViewModel.LoginState.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    handleError(Exception(loginState.message))
+                }
+            }
+        }
     }
 
     private fun setupLogin() {
@@ -56,18 +62,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             binding.progressBar.visibility = View.VISIBLE
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { result ->
-                    binding.progressBar.visibility = View.GONE
-                    if (result.isSuccessful) {
-                        val user = auth.currentUser
-                        if (user != null) {
-                            moveToMainActivity()
-                        }
-                    } else {
-                        handleError(result.exception)
-                    }
-                }
+
+            viewModel.login(email, password)
         }
     }
 

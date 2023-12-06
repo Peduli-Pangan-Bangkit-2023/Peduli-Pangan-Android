@@ -52,4 +52,8 @@
     <string name="price_dummy">Rp15.000</string>
     <string name="expired_check">Expired Check</string>
     <string name="content_description_fab_scan">Peninjauan</string>
+    <string name="expiration_checker">Expiration Checker</string>
+    <string name="nearest_restaurant">Restoran Disekitar Anda</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 </resources>

@@ -23,6 +23,12 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <activity
+        android:id="@+id/navigation_expired_check"
+        android:name="com.alvintio.pedulipangan.view.ExpirationCheckerActivity"
+        android:label="Expiration Check"
+        tools:layout="@layout/activity_expiration_checker"/>
+
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.alvintio.pedulipangan.ui.settings.SettingsFragment"

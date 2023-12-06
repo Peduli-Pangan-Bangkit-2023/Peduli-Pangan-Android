@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alvintio.pedulipangan.R
+import com.alvintio.pedulipangan.data.remote.ApiConfig
+import com.alvintio.pedulipangan.model.Food
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import retrofit2.Call
+import retrofit2.Response
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -36,9 +40,37 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val apiService = ApiConfig.getApiService()
+
+        apiService.getProducts().enqueue(object : retrofit2.Callback<List<Food>> {
+            override fun onResponse(call: Call<List<Food>>, response: Response<List<Food>>) {
+                if (response.isSuccessful) {
+                    val foodList = response.body()
+                    foodList?.let {
+                        updateMarkers(it)
+                    }
+                } else {
+                }
+            }
+
+            override fun onFailure(call: Call<List<Food>>, t: Throwable) {
+            }
+        })
+    }
+
+    private fun updateMarkers(foodList: List<Food>) {
+        activity?.runOnUiThread {
+            mMap.clear()
+            foodList.forEach { food ->
+                val location = LatLng(food.latitude, food.longitude)
+                mMap.addMarker(MarkerOptions().position(location).title(food.name))
+            }
+
+            if (foodList.isNotEmpty()) {
+                val initialLocation = LatLng(foodList[0].latitude, foodList[0].longitude)
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(initialLocation))
+            }
+        }
     }
 
     override fun onResume() {

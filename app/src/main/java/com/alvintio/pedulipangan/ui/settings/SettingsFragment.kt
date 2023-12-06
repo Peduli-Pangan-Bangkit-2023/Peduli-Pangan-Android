@@ -1,18 +1,13 @@
 package com.alvintio.pedulipangan.ui.settings
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.alvintio.pedulipangan.data.repo.UserPreferences
 import com.alvintio.pedulipangan.databinding.FragmentSettingsBinding
-import com.alvintio.pedulipangan.util.ViewUtils
 import com.alvintio.pedulipangan.view.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,35 +15,46 @@ class SettingsFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var userPreferences: UserPreferences
-    private val Context.dataStore by preferencesDataStore("user_preferences")
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        auth = FirebaseAuth.getInstance()
+
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        auth = FirebaseAuth.getInstance()
-
-        userPreferences = UserPreferences.getInstance(requireContext().dataStore)
-
-        val viewModelFactory = SettingsViewModelFactory(userPreferences)
-        val settingsViewModel = ViewModelProvider(this, viewModelFactory).get(SettingsViewModel::class.java)
-
-        settingsViewModel.logoutComplete.observe(viewLifecycleOwner) { logoutComplete ->
-            if (logoutComplete) {
-                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
-                requireActivity().finish()
-            }
-        }
-
         binding.btnLogout.setOnClickListener {
-            settingsViewModel.userLogout()
+            settingsViewModel.logout()
+            val intent = Intent(requireContext(), WelcomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            requireActivity().finish()
         }
+
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            settingsViewModel.getUserData(currentUser.uid)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        settingsViewModel.userData.observe(viewLifecycleOwner) { userData ->
+            binding.tvUserName.text = userData.name
+            binding.tvUserEmail.text = userData.email
+        }
     }
 
     override fun onDestroyView() {

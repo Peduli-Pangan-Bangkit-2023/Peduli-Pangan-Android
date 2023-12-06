@@ -3,15 +3,46 @@ package com.alvintio.pedulipangan.ui.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alvintio.pedulipangan.data.repo.UserPreferences
+import com.alvintio.pedulipangan.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
-class SettingsViewModel(private val pref: UserPreferences) : ViewModel() {
-    private val _logoutComplete = MutableLiveData<Boolean>()
-    val logoutComplete: LiveData<Boolean> = _logoutComplete
+class SettingsViewModel : ViewModel() {
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun userLogout() {
+    private val _userData = MutableLiveData<User>()
+    val userData: LiveData<User>
+        get() = _userData
+
+    private var userDataListener: ListenerRegistration? = null
+
+    fun logout() {
         FirebaseAuth.getInstance().signOut()
-        _logoutComplete.value = true
+    }
+
+    fun getUserData(uid: String) {
+        val userRef: DocumentReference = firestore.collection("users").document(uid)
+
+        userDataListener?.remove()
+
+        userDataListener = userRef.addSnapshotListener { documentSnapshot, _ ->
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                val user = documentSnapshot.toObject(User::class.java)
+
+                if (user != null) {
+                    _userData.value = user
+                } else {
+                }
+            }
+        }
+    }
+
+
+    override fun onCleared() {
+        userDataListener?.remove()
+        super.onCleared()
     }
 }

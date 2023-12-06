@@ -96,38 +96,6 @@
             app:tint="@color/black" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/btn_expired_check"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/settings_sub_background"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_language_settings">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:textStyle="bold"
-            android:text="@string/expired_check"
-            android:textColor="@color/black"
-            app:drawableStartCompat="@drawable/baseline_check_24"
-            app:drawableTint="@color/black"
-            tools:ignore="RelativeOverlap" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/baseline_arrow_forward_ios_24"
-            app:tint="@color/black" />
-    </RelativeLayout>
-
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
@@ -140,5 +108,5 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_expired_check" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_language_settings" />
 </androidx.constraintlayout.widget.ConstraintLayout>

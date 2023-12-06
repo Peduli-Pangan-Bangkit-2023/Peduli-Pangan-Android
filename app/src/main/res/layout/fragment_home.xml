@@ -10,11 +10,11 @@
         android:id="@+id/tv_title_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="@string/rekomendasi_makanan"
         android:textColor="@color/dark_green"
-        android:textSize="40sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,13 +25,42 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:listitem="@layout/food_list"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_home"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_home"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/food_list" />
 
+    <TextView
+        android:id="@+id/tv_title_nearest_restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/nearest_restaurant"
+        android:textColor="@color/dark_green"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.251" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNearestRestaurant"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_home"
+        app:layout_constraintVertical_bias="0.299"
+        tools:listitem="@layout/food_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
