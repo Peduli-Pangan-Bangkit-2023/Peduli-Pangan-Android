@@ -9,16 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.alvintio.pedulipangan.R
 import com.alvintio.pedulipangan.databinding.FragmentDashboardBinding
-import com.alvintio.pedulipangan.adapter.RestaurantAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var adapter: RestaurantAdapter
-    private lateinit var restaurantList: List<String>
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     override fun onCreateView(
@@ -47,7 +43,6 @@ class DashboardFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // handleSearchQuery(newText)
                 return true
             }
         })
@@ -74,15 +69,4 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    /*private fun handleSearchQuery(query: String?) {
-        // Assuming restaurantList is a list of strings
-        val filteredList = restaurantList.filter { restaurant ->
-            restaurant.contains(query.orEmpty(), ignoreCase = true)
-        }
-
-        // Update your adapter or perform any action based on the search query
-        // adapter.updateData(filteredList)
-    } */
-
 }

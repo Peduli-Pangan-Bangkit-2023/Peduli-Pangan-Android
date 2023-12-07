@@ -1,11 +1,14 @@
 package com.alvintio.pedulipangan.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +20,8 @@ import com.alvintio.pedulipangan.adapter.FoodAdapter
 import com.alvintio.pedulipangan.data.remote.ApiConfig
 import com.alvintio.pedulipangan.databinding.FragmentHomeBinding
 import com.alvintio.pedulipangan.model.Food
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,9 +33,14 @@ class HomeFragment : Fragment() {
     private val locationManager by lazy {
         requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
-
     private val locationPermissionCode = 123
+    private var userLatitude: Double = 0.0
+    private var userLongitude: Double = 0.0
+    private var userLocation: Location? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +48,27 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+        val userId = auth.currentUser?.uid
+
+        userId?.let {
+            firestore.collection("users").document(it).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val username = document.getString("name")
+                        binding.tvTitle.text = "Selamat Datang, $username!"
+                    } else {
+                        Log.d("HomeFragment", "Dokumen tidak ditemukan.")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("HomeFragment", "Gagal membaca data: $exception")
+                }
+        }
+
+        getUserLocation()
         getProducts()
 
         if (hasLocationPermission()) {
@@ -45,6 +76,7 @@ class HomeFragment : Fragment() {
         } else {
             requestLocationPermission()
         }
+
 
         return view
     }
@@ -64,6 +96,7 @@ class HomeFragment : Fragment() {
         )
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -78,6 +111,50 @@ class HomeFragment : Fragment() {
                 Toast.makeText(
                     requireContext(),
                     "Location permission denied",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun getUserLocation() {
+        if (hasLocationPermission()) {
+            try {
+                val locationListener = object : LocationListener {
+                    override fun onLocationChanged(location: Location) {
+                        userLatitude = location.latitude
+                        userLongitude = location.longitude
+                        Log.d("UserLocation", "Latitude: $userLatitude, Longitude: $userLongitude")
+                    }
+
+                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+
+                    override fun onProviderEnabled(provider: String) {}
+
+                    override fun onProviderDisabled(provider: String) {}
+                }
+
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    1000,
+                    1f,
+                    locationListener
+                )
+
+                val lastKnownLocation: Location? =
+                    locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                        ?: locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+                lastKnownLocation?.let {
+                    userLatitude = it.latitude
+                    userLongitude = it.longitude
+                    userLocation = it
+                    Log.d("UserLocation", "Latitude: $userLatitude, Longitude: $userLongitude")
+                }
+            } catch (e: SecurityException) {
+                Toast.makeText(
+                    requireContext(),
+                    "Location permission is required",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -103,7 +180,14 @@ class HomeFragment : Fragment() {
                                 if (response.isSuccessful) {
                                     val restaurantList = response.body()
                                     restaurantList?.let {
-                                        setupNearestRestaurantRecyclerView(it)
+                                        val nearestRestaurants = filterRestaurantsByDistance(
+                                            it,
+                                            location.latitude,
+                                            location.longitude,
+                                            15.0 // Jarak maksimal dalam kilometer
+                                        )
+                                        Log.d("Restaurants", nearestRestaurants.toString())
+                                        setupNearestRestaurantRecyclerView(nearestRestaurants)
                                     }
                                 } else {
                                     Toast.makeText(
@@ -133,15 +217,42 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun filterRestaurantsByDistance(
+        restaurants: List<Food>,
+        userLatitude: Double,
+        userLongitude: Double,
+        maxDistance: Double
+    ): List<Food> {
+        val filteredRestaurants = mutableListOf<Food>()
+
+        userLocation?.let { userLoc ->
+            for (restaurant in restaurants) {
+                val restaurantLocation = Location("RestaurantLocation")
+                restaurantLocation.latitude = restaurant.latitude
+                restaurantLocation.longitude = restaurant.longitude
+
+                val distance = userLoc.distanceTo(restaurantLocation) / 1000
+
+                if (distance <= maxDistance) {
+                    filteredRestaurants.add(restaurant)
+                }
+            }
+        }
+
+        return filteredRestaurants
+    }
+
     private fun setupNearestRestaurantRecyclerView(restaurantList: List<Food>) {
         val foodAdapter = FoodAdapter(restaurantList)
 
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        foodAdapter.setUserLocation(userLatitude, userLongitude)
+
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewNearestRestaurant.layoutManager = layoutManager
 
         binding.recyclerViewNearestRestaurant.adapter = foodAdapter
     }
+
 
     private fun getProducts() {
         val apiService = ApiConfig.getApiService()

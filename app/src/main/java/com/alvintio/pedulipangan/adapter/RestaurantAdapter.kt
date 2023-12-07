@@ -40,7 +40,5 @@ class RestaurantAdapter(private var restaurantList: List<String>) :
     fun getRestaurantName(position: Int): String {
         return restaurantList[position]
     }
-
-
 }
 

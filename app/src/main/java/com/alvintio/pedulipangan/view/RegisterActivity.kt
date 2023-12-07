@@ -94,7 +94,6 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerWithEmailAndPassword(name: String, email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                // Mengatur ProgressBar kembali ke GONE setelah operasi selesai
                 binding.progressBar.visibility = View.GONE
 
                 if (task.isSuccessful) {
@@ -121,30 +120,5 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-    }
-
-    private fun showSuccessDialog() {
-        AlertDialog.Builder(this).apply {
-            setTitle(getString(R.string.success))
-            setMessage(getString(R.string.success))
-            setPositiveButton(getString(R.string.continue_on)) { _, _ ->
-                ViewUtils.moveActivityNoHistory(this@RegisterActivity, WelcomeActivity::class.java)
-            }
-            setOnCancelListener {
-                ViewUtils.moveActivityNoHistory(this@RegisterActivity, WelcomeActivity::class.java)
-            }
-            create()
-            show()
-        }
-    }
-
-    private fun handleError(exception: Exception?) {
-        AlertDialog.Builder(this).apply {
-            setTitle(getString(R.string.error))
-            setMessage(exception?.localizedMessage ?: getString(R.string.error))
-            setPositiveButton(getString(R.string.continue_on)) { _, _ -> }
-            create()
-            show()
-        }
     }
 }

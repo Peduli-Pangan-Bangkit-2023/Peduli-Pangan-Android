@@ -90,7 +90,6 @@ class ExpirationCheckerActivity : AppCompatActivity() {
             }
         }
 
-
         ViewUtils.setupFullScreen(this)
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.alvintio.pedulipangan.MainActivity
 import com.alvintio.pedulipangan.R
 import com.alvintio.pedulipangan.databinding.ActivityLoginBinding
@@ -29,6 +30,9 @@ class LoginActivity : AppCompatActivity() {
         ViewUtils.setupFullScreen(this)
 
         setupLogin()
+
+        viewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
+
 
         viewModel.loginState.observe(this) { loginState ->
             when (loginState) {

@@ -10,13 +10,13 @@ class DashboardPagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int {
-        return 2 // Assuming you have two fragments (list and map)
+        return 2
     }
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> ListFragment() as Fragment // Replace with your actual list fragment class
-            1 -> MapsFragment()// Replace with your actual map fragment class
+            0 -> ListFragment()
+            1 -> MapsFragment()
             else -> throw IllegalArgumentException("Invalid position")
         }
     }

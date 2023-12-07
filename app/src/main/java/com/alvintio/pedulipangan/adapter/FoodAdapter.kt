@@ -9,12 +9,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alvintio.pedulipangan.R
 import com.alvintio.pedulipangan.model.Food
+import com.alvintio.pedulipangan.view.DetailListActivity
 import com.bumptech.glide.Glide
 
 class FoodAdapter(private var foodList: List<Food>) : RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
+    private var userLatitude: Double? = null
+    private var userLongitude: Double? = null
+
     fun updateData(newFoodList: List<Food>) {
         foodList = newFoodList
+        notifyDataSetChanged()
+    }
+
+    fun setUserLocation(latitude: Double, longitude: Double) {
+        userLatitude = latitude
+        userLongitude = longitude
         notifyDataSetChanged()
     }
 
@@ -28,6 +38,18 @@ class FoodAdapter(private var foodList: List<Food>) : RecyclerView.Adapter<FoodA
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val selectedFood = foodList[position]
+
+                    val context = itemView.context
+
+                    val intent = Intent(context, DetailListActivity::class.java).apply {
+                        putExtra(DetailListActivity.EXTRA_PRODUCT_ID, selectedFood.id)
+                        putExtra(DetailListActivity.EXTRA_PRODUCT_NAME, selectedFood.name)
+                        putExtra(DetailListActivity.EXTRA_PRODUCT_PRICE, selectedFood.price)
+                        putExtra(DetailListActivity.EXTRA_PRODUCT_DESCRIPTION, selectedFood.detail)
+                        putExtra(DetailListActivity.EXTRA_PRODUCT_IMAGE, selectedFood.attachment)
+                    }
+
+                    context.startActivity(intent)
                 }
             }
         }

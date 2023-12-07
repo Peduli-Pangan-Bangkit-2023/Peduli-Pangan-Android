@@ -10,7 +10,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 
 class SettingsViewModel : ViewModel() {
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     private val _userData = MutableLiveData<User>()
@@ -22,7 +21,6 @@ class SettingsViewModel : ViewModel() {
     fun logout() {
         FirebaseAuth.getInstance().signOut()
     }
-
     fun getUserData(uid: String) {
         val userRef: DocumentReference = firestore.collection("users").document(uid)
 
@@ -39,7 +37,6 @@ class SettingsViewModel : ViewModel() {
             }
         }
     }
-
 
     override fun onCleared() {
         userDataListener?.remove()

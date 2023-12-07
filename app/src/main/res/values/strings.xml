@@ -56,4 +56,10 @@
     <string name="nearest_restaurant">Restoran Disekitar Anda</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="welcome_title">Selamat Datang, John Doe!</string>
+    <string name="product_detail">Nasi Goreng\n</string>
+    <string name="product_detail_price">Rp10.000</string>
+    <string name="product_detail_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla laoreet faucibus lacus vel efficitur. Proin bibendum elit eget diam fringilla, quis pharetra velit egestas. Ut ligula eros, condimentum id leo a, laoreet pretium leo. Vestibulum tempus mauris ut pharetra porta. Morbi sit amet erat ut mi condimentum interdum nec eget diam. Nulla eget purus lobortis, dignissim lorem hendrerit, ultrices tortor. Sed hendrerit mollis ex vitae pretium. In facilisis neque eu nisi eleifend, sit amet dictum felis venenatis. Etiam accumsan libero justo, non tempor sem dictum et. Suspendisse porta ante posuere, consectetur orci eget, rutrum nibh. Mauris ut posuere enim. Aenean euismod urna malesuada, porttitor ante a, viverra arcu. Sed tincidunt risus sit amet ex accumsan, ut finibus augue sodales.</string>
+    <string name="reserve_products">Reserve\n</string>
+    <string name="delete_products">Reserve</string>
 </resources>

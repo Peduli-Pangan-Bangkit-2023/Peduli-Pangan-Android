@@ -12,7 +12,6 @@ import retrofit2.Response
 class DashboardViewModel : ViewModel() {
     private val _foodList = MutableLiveData<List<Food>>()
     val foodList: LiveData<List<Food>> get() = _foodList
-
     fun fetchFoods() {
         val apiService = ApiConfig.getApiService()
 
