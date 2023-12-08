@@ -21,6 +21,9 @@
         android:theme="@style/Theme.PeduliPangan"
         tools:targetApi="31">
         <activity
+            android:name=".view.ReserveActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.DetailListActivity"
             android:exported="false" />
         <activity
