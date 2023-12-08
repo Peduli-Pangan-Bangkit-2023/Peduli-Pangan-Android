@@ -2,6 +2,7 @@ package com.alvintio.pedulipangan.ui.dashboard
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.alvintio.pedulipangan.R
 import com.alvintio.pedulipangan.databinding.FragmentDashboardBinding
+import com.alvintio.pedulipangan.viewmodel.SharedViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -16,14 +18,15 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var sharedViewModel: SharedViewModel
+
     @SuppressLint("UseCompatLoadingForColorStateLists")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -43,6 +46,7 @@ class DashboardFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                sharedViewModel.setSearchQuery(newText.orEmpty())
                 return true
             }
         })
@@ -57,10 +61,6 @@ class DashboardFragment : Fragment() {
                 else -> throw IllegalArgumentException("Invalid position")
             }
         }.attach()
-
-        val filterButton = binding.filterButton
-        filterButton.setOnClickListener {
-        }
 
         return root
     }
