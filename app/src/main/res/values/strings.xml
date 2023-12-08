@@ -69,5 +69,7 @@
     <string name="date_reserve">%1$s</string>
     <string name="price_reserve">%s</string>
     <string name="kembali">Kembali</string>
+    <string name="notification_text">Pembelian sebesar Rp.10.000 telah berhasil</string>
+    <string name="date_notification">10 Des 2023</string>
 
 </resources>
